@@ -1,2 +1,2 @@
-### C4AI
+# C4AI
 ## Connect four game with AI playing
