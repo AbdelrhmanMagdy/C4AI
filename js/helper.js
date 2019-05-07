@@ -33,9 +33,25 @@ const renderBoard = (tableData) => {
 
 const playerClicked = (c) => {
     try{
-        game.playAt(c, 2)
+        game.playAt(c)
     }catch(err){
         alert(err)
     }
+    if (game.isWinner(c)){
+        renderBoard(game.board)
+        setTimeout(()=>{alert('You Win!');game.resetBoard();renderBoard(game.board)}, 0)
+        
+        return;
+    }
     renderBoard(game.board)
+    game.tooglePlayer()
+
+    c = game.playAI()
+    if (game.isWinner(c)){
+        renderBoard(game.board)
+        setTimeout(()=>{alert('You Lose!');game.resetBoard();renderBoard(game.board)}, 0)
+    }
+    renderBoard(game.board)
+    game.tooglePlayer()
+
 }

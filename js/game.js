@@ -12,7 +12,9 @@ class Game {
     get board() {
         return this._board;
     }
-
+    set board(val) {
+        this._board = val;
+    }
     get rows() {
         return this._board.length
     }
@@ -37,7 +39,7 @@ class Game {
     }
     playAt(col) {
         if (col>=this.cols){
-            throw new Error('this.IndiskTypeid column index!')
+            throw new Error('Invalid column index!')
         }
         for(let r=this.rows-1; r>=0; r--){
             if (this.board[r][col]==0){
@@ -49,30 +51,28 @@ class Game {
 
     }
 
-    start(){
-        let limit=5
-        while(limit--){
-
-            if(this.playerAI){
-                let step = this.utility()
-                this.playAt(step)
-                this.isWinner(step)
-            }else{
-                let step = this.utility()
-                this.playAt(step)
-            }
-            this.tooglePlayer()
-            renderBoard(game.board);
+    playAI(){
+        let rand = this.utility()
+        try{
+            this.playAt(rand)
+        }catch{
+            this.playAI()
         }
+        return rand
     }
 
     utility(){
         return Math.floor(Math.random() * this.cols);
     }
-
+    resetBoard(){
+        for(let i = 0; i < this.rows; i++) {
+            this.board[i].fill(0); 
+        }    
+    }
     isWinner(col){
-        console.log(this.board)
         let row = 0
+        console.log(this.board)
+        console.log(this.diskType)
         for(let r=0; r<this.rows; r++){
             if (this.board[r][col]!=0){
                 row = r;
@@ -95,6 +95,7 @@ class Game {
         // check diagonally winning
         let r_temp = row
         let c_temp = col
+        // right diagonal
         while(r_temp<this.rows-1 && c_temp>0){
             r_temp++;
             c_temp--;
@@ -106,7 +107,9 @@ class Game {
             r_temp--;
             c_temp++;
         }
-
+        // left diagonal
+        r_temp = row
+        c_temp = col
         while(r_temp<this.rows-1 && c_temp<this.cols-1){
             r_temp++;
             c_temp++;

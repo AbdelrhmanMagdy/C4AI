@@ -1,0 +1,32 @@
+#game {
+  background-color: black;
+  width: 478px;
+
+}
+
+.board button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 0;
+  background: rgb(202, 200, 200);
+  cursor: pointer;
+
+}
+
+td {
+  border: 2px solid #bbb;
+
+}
+
+.board button:hover {
+  filter: brightness(75%);
+}
+
+.red {
+  background-color: red !important;
+}
+
+.blue {
+  background-color: blue !important;
+}
