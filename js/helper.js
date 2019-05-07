@@ -13,8 +13,9 @@ const renderBoard = (tableData) => {
         rowData.forEach((cellData, c) => {
             var cell = document.createElement('td');
             var btn = document.createElement('button')
+            var style = document.createElement('style')
             if (cellData == 1){
-                btn.className = 'red'
+                btn.className = 'red';
             }else if(cellData == 2){
                 btn.className = 'blue'
             }
