@@ -6,7 +6,7 @@ class Game {
         }
         this._board = array; 
         this._playerAI = true;
-        this._diskType = 1; 
+        this._diskType = diskVals.HUMAN; 
     }
     
     get board() {
@@ -35,14 +35,14 @@ class Game {
     }
     tooglePlayer() {
         this.playerAI = !this.playerAI
-        this.diskType==1? this.diskType  = 2 : this.diskType = 1;
+        this.diskType==diskVals.AI? this.diskType  = diskVals.HUMAN : this.diskType = diskVals.AI;
     }
     playAt(col) {
         if (col>=this.cols){
             throw new Error('Invalid column index!')
         }
         for(let r=this.rows-1; r>=0; r--){
-            if (this.board[r][col]==0){
+            if (this.board[r][col]==diskVals.DEFAULT){
                 this.board[r][col] =  this.diskType
                 return;
             }
@@ -52,13 +52,13 @@ class Game {
     }
 
     playAI(){
-        let rand = this.utility()
+        const [score, pos] = maximizer(this.board, gameDepth, Number.NEGATIVE_INFINITY,Number.POSITIVE_INFINITY)
         try{
-            this.playAt(rand)
+            this.playAt(pos)
         }catch{
             this.playAI()
         }
-        return rand
+        return pos
     }
 
     utility(){
@@ -71,8 +71,6 @@ class Game {
     }
     isWinner(col){
         let row = 0
-        console.log(this.board)
-        console.log(this.diskType)
         for(let r=0; r<this.rows; r++){
             if (this.board[r][col]!=0){
                 row = r;

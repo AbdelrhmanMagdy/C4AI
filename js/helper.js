@@ -1,4 +1,5 @@
 const renderBoard = (tableData) => {
+    console.log('renderBoard: ', tableData)
     var gameDiv = document.getElementById('game');
     if (gameDiv.hasChildNodes()){
         gameDiv.removeChild(document.getElementById('board'))
@@ -14,9 +15,9 @@ const renderBoard = (tableData) => {
             var cell = document.createElement('td');
             var btn = document.createElement('button')
             var style = document.createElement('style')
-            if (cellData == 1){
+            if (cellData == diskVals.AI){
                 btn.className = 'red';
-            }else if(cellData == 2){
+            }else if(cellData == diskVals.HUMAN){
                 btn.className = 'blue'
             }
             btn.addEventListener("click", function(){ playerClicked(c) });
