@@ -15,8 +15,20 @@
     <h1 style="color:aliceblue">! عاركني <span style='font-size:30px;'>&#128526;</span></h1>
 
     <div style="text-align:center">
+                <div class="btn-group">
+            <button type="button" id="boardSize" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                6 x 7 <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a onclick="setBoardSize(4,5)" href="#">4 x 5</a></li>
+                <li><a onclick="setBoardSize(6,7)" href="#">6 x 7</a></li>
+                <li><a onclick="setBoardSize(8,8)" href="#">8 x 8</a></li>
+                <li><a onclick="setBoardSize(7,10)" href="#">7 x 10</a></li>
+            </ul>
+        </div>
         <div class="btn-group">
-            <button type="button" id="dropDown" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            <button type="button" id="lvlDiff" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
                 Easy <span class="caret"></span>
             </button>
