@@ -1,7 +1,7 @@
 # C4AI
 ## Connect four game with AI Algorithm
 
-![C4AI Board](https://github.com/AbdelrhmanMagdy/C4AI/tree/master/docs/c4ai.png)
+![C4AI Board](https://github.com/AbdelrhmanMagdy/C4AI/blob/master/docs/c4ai.png?raw=true)
 
 ## Features
     - playing with AI.
