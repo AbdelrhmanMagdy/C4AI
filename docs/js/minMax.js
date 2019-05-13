@@ -1,4 +1,9 @@
-// require('./global');
+/**
+ * Get the current possible moves in the game board.
+ * @param  {Number[][]} board 2D board array contains the board values.
+ * @param  {Number} cols number of the cols in the game board.
+ * @returns {Number[]} array contains the possible moves indecies.
+ */
 const getPossibleMoves = (board, cols) => {
     const moves = []
     cols.forEach(c => {
@@ -15,6 +20,14 @@ const getPossibleMoves = (board, cols) => {
     return moves
 }
 
+/**
+ * Take the max score of the children and call the minimizer for the next depth.
+ * @param  {Number[][]} board 2D board array contains the board values.
+ * @param  {Number} depth the depth of the traverse.
+ * @param  {Number} alpha the value of the min score.
+ * @param  {Number} beta the value of the max score.
+ * @returns {Number[]} array contains the alpha score with the indecies lead to that path.
+ */
 const maximizer = (_board, depth, alpha, beta) => {
     const board = [..._board]
     let maxIndex = 0
@@ -24,9 +37,6 @@ const maximizer = (_board, depth, alpha, beta) => {
         const utilityVal = utilityFn(board)
         return [utilityVal, null]
     }
-    // if (utilityFn(board) === Number.POSITIVE_INFINITY) {
-    //     return [Number.POSITIVE_INFINITY, null]
-    // }
     if (utilityFn(board) === Number.NEGATIVE_INFINITY) {
         return [Number.NEGATIVE_INFINITY, null]
     }
@@ -47,6 +57,14 @@ const maximizer = (_board, depth, alpha, beta) => {
     return [alpha, maxIndex];
 }
 
+/**
+ * Take the min score of the children and call the maximizer for the next depth.
+ * @param  {Number[][]} board 2D board array contains the board values.
+ * @param  {Number} depth the depth of the traverse.
+ * @param  {Number} alpha the value of the min score.
+ * @param  {Number} beta the value of the max score.
+ * @returns {Number[]} array contains the beta score with the indecies lead to that path.
+ */
 const minimizer = (_board, depth, alpha, beta) => {
     const board = [..._board]
     let minIndex = 0
@@ -59,10 +77,6 @@ const minimizer = (_board, depth, alpha, beta) => {
     if (utilityFn(board) === Number.POSITIVE_INFINITY) {
         return [Number.POSITIVE_INFINITY, null]
     }
-    // if (utilityFn(board) === Number.NEGATIVE_INFINITY) {
-    //     return [Number.NEGATIVE_INFINITY, null]
-    // }
-
     for (let i = 0; i < possibleMoves.length; i++) {
         board[possibleMoves[i].r][possibleMoves[i].c] = diskVals.HUMAN
         const [maxVal, _] = maximizer(board, depth - 1, alpha, beta)
@@ -78,8 +92,12 @@ const minimizer = (_board, depth, alpha, beta) => {
     return [beta, minIndex];
 }
 
-
-evalSlice = (slice) => {
+/**
+ * Take an array of four element and return a calculated score based on the value of the elements.
+ * @param  {Number[]} slice array contains four element sliced from the game board.
+ * @returns {Number} score for the sliced array.
+ */
+const evalSlice = (slice) => {
     if (slice.reduce((a, b) => a + b, 0) === diskVals.HUMAN * 4) {
         return Number.NEGATIVE_INFINITY
     }
@@ -96,6 +114,11 @@ evalSlice = (slice) => {
     return 0;
 }
 
+/**
+ * The funcion that evaluate the board and returns the score for the current state.
+ * @param  {Number[][]} board 2D board array contains the board values.
+ * @returns {Number} score for the current board game state.
+ */
 const utilityFn = (_board) => {
     const board = [..._board]
     const rows = board.length
@@ -118,7 +141,6 @@ const utilityFn = (_board) => {
 
         }
     }
-
     // check diagonally
     for (let r = 0; r < rows - 3; r++) {
         for (let c = 0; c < cols - 3; c++) {
@@ -135,8 +157,5 @@ const utilityFn = (_board) => {
             if (score === Number.POSITIVE_INFINITY) return score
         }
     }
-
-    // console.log(score)
     return score
-
 }

@@ -1,3 +1,7 @@
+/**
+ * Create and render the game board with DOM elements.
+ * @param  {Number[][]} tableData 2D array containing the game board values.
+ */
 const renderBoard = (tableData) => {
     var gameDiv = document.getElementById('game');
     if (gameDiv.hasChildNodes()) {
@@ -34,6 +38,10 @@ const renderBoard = (tableData) => {
     document.body.appendChild(gameDiv);
 }
 
+/**
+ * Fires when a Human play at certin columns.
+ * calls the AI play function and checks the winning conditions after each play.
+ */
 const playerClicked = (c) => {
     try {
         game.playAt(c)
@@ -44,15 +52,15 @@ const playerClicked = (c) => {
         renderBoard(game.board)
         setTimeout(() => {
             swal({
-                title: "Congrats you win!",
-                buttons: ["Cancel", "Restart"],
-              })
-              .then((ok) => {
-                if (ok) {
-                    game.resetBoard()
-                    renderBoard(game.board)
-                }
-              });
+                    title: "Congrats you win!",
+                    buttons: ["Cancel", "Restart"],
+                })
+                .then((ok) => {
+                    if (ok) {
+                        game.resetBoard()
+                        renderBoard(game.board)
+                    }
+                });
         }, 0)
 
         return;
@@ -65,18 +73,17 @@ const playerClicked = (c) => {
         renderBoard(game.board)
         setTimeout(() => {
             swal({
-                title: "AI win!",
-                buttons: ["Cancel", "Restart"],
-              })
-              .then((ok) => {
-                if (ok) {
-                    game.resetBoard()
-                    renderBoard(game.board)
-                }
-              });
+                    title: "AI win!",
+                    buttons: ["Cancel", "Restart"],
+                })
+                .then((ok) => {
+                    if (ok) {
+                        game.resetBoard()
+                        renderBoard(game.board)
+                    }
+                });
         }, 0)
     }
     renderBoard(game.board)
     game.tooglePlayer()
-
 }

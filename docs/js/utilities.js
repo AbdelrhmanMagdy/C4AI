@@ -1,3 +1,7 @@
+/**
+ * Functions fires based on event listeners in DOM elements
+ */
+
 saveState = () => {
     localStorage.setItem('gameState', JSON.stringify({
         board: game.board
@@ -7,6 +11,7 @@ saveState = () => {
         icon: "success",
     });
 }
+
 loadState = () => {
     game.board = JSON.parse(localStorage.getItem('gameState')).board
     renderBoard(game.board)
@@ -15,6 +20,7 @@ loadState = () => {
         icon: "success",
     });
 }
+
 selectDifficulty = (level, label) => {
     gameDepth = level
     const btn = document.getElementById('lvlDiff');
