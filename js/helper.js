@@ -54,7 +54,7 @@ const playerClicked = c => {
     setTimeout(() => {
       swal({
         title: 'Congrats you win!',
-        buttons: 'Play Again'
+        buttons: ['cancel','Play Again']
       }).then(ok => {
         if (ok) {
           game.resetBoard();
@@ -75,7 +75,7 @@ const playerClicked = c => {
       setTimeout(() => {
         swal({
           title: 'AI win!',
-          buttons: 'Play Again'
+          buttons: ['cancel','Play Again']
         }).then(ok => {
           if (ok) {
             game.resetBoard();
