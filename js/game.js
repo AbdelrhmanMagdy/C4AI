@@ -1,8 +1,8 @@
 class Game {
-    constructor(numRows, numColumns, fill){
+    constructor(numRows, numColumns){
         const array = new Array(numRows); 
         for(let i = 0; i < numRows; i++) {
-            array[i] = new Array(numColumns).fill(fill); 
+            array[i] = new Array(numColumns).fill(diskVals.DEFAULT); 
         }
         this._board = array; 
         this._playerAI = true;

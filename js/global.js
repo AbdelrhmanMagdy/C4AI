@@ -4,4 +4,5 @@ diskVals =  {
     HUMAN: 5
 }
 
-gameDepth = 5
+gameDepth = 3
+gameDims = {rows: 6, cols: 7}

@@ -7,7 +7,7 @@ body{
 }
 #game {
   background-color: black;
-  width: 478px;
+  width: fit-content;
   margin: auto;
   transform: perspective(1px) translateY(20%);
   border-bottom: 10px solid #bbb;
