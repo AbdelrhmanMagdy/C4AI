@@ -10,9 +10,9 @@
     - diffrent standart board size.
 
 ## Algorithm
-    - Min Max algorithm with custom evaluation function.
+    - Min Max algorithm with alpha beta pruning and custom evaluation function.
 
 ## Collaborators
     - Abdelrhman Magdy
-    - Waleed Emab
+    - Waleed Emad
     - Youssef Mohamed
