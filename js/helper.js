@@ -1,5 +1,4 @@
 const renderBoard = (tableData) => {
-    console.log('renderBoard: ', tableData)
     var gameDiv = document.getElementById('game');
     if (gameDiv.hasChildNodes()) {
         gameDiv.removeChild(document.getElementById('board'))

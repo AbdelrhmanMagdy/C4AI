@@ -136,14 +136,7 @@ const utilityFn = (_board) => {
         }
     }
 
-
-
-
     // console.log(score)
     return score
-    // const rand = Math.floor(Math.random(0, 10) * 10)
-    // //      let v = templist[counter]
-    // counter++;
-    // console.log(' score: ' + rand)
-    // return rand
+
 }
