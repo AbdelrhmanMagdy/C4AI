@@ -41,15 +41,27 @@ restart = () => {
         })
         .then((ok) => {
             if (ok) {
-                game.resetBoard()
-                renderBoard(game.board)
+                swal({
+                        title: "Do you want to start first?",
+                        buttons: ["No", "Yes"],
+                    })
+                    .then((ok) => {
+                        if (ok) {
+                            game.resetBoard()
+                            renderBoard(game.board)
+                        } else {
+                            game.resetBoard()
+                            renderBoard(game.board)
+                            startWithAI()
+                        }
+                    });
             }
         });
 }
 
 setBoardSize = (r, c) => {
     const btn = document.getElementById('boardSize');
-    btn.innerHTML = `${r}x${c} <span class="caret"></span>` ;
+    btn.innerHTML = `${r}x${c} <span class="caret"></span>`;
     game = new Game(r, c)
     renderBoard(game.board)
 }

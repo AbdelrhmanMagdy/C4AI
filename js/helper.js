@@ -24,7 +24,7 @@ const renderBoard = tableData => {
       } else if (cellData == diskVals.HUMAN) {
         btn.className = 'blue';
       }
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function () {
         playerClicked(c);
       });
       cell.appendChild(btn);
@@ -48,17 +48,31 @@ const playerClicked = c => {
     game.playAt(c);
   } catch (err) {
     alert(err);
+    return
   }
   if (game.isWinner(c)) {
     renderBoard(game.board);
     setTimeout(() => {
       swal({
         title: 'Congrats you win!',
-        buttons: ['cancel','Play Again']
+        buttons: ['cancel', 'Play Again']
       }).then(ok => {
         if (ok) {
-          game.resetBoard();
-          renderBoard(game.board);
+          swal({
+            title: "Do you want to start first?",
+            buttons: ["No", "Yes"],
+        })
+        .then((ok) => {
+            if (ok) {
+                game.resetBoard()
+                renderBoard(game.board)
+            } else {
+                console.log(ok)
+                game.resetBoard()
+                renderBoard(game.board)
+                startWithAI()
+            }
+        });
         }
       });
     }, 0);
@@ -75,7 +89,46 @@ const playerClicked = c => {
       setTimeout(() => {
         swal({
           title: 'AI win!',
-          buttons: ['cancel','Play Again']
+          buttons: ['cancel', 'Play Again']
+        }).then(ok => {
+          if (ok) {
+            swal({
+              title: "Do you want to start first?",
+              buttons: ["No", "Yes"],
+          })
+          .then((ok) => {
+              if (ok) {
+                  game.resetBoard()
+                  renderBoard(game.board)
+              } else {
+                  console.log(ok)
+                  game.resetBoard()
+                  renderBoard(game.board)
+                  startWithAI()
+              }
+          });
+          }
+        });
+      }, 0);
+    }
+    renderBoard(game.board);
+    game.tooglePlayer();
+    document.body.removeChild(spinner.el);
+  }, 0);
+};
+
+startWithAI = () => {
+  renderBoard(game.board);
+  game.tooglePlayer();
+  document.body.appendChild(spinner.el);
+  setTimeout(() => {
+    c = game.playAI();
+    if (game.isWinner(c)) {
+      renderBoard(game.board);
+      setTimeout(() => {
+        swal({
+          title: 'AI win!',
+          buttons: ['cancel', 'Play Again']
         }).then(ok => {
           if (ok) {
             game.resetBoard();
@@ -88,4 +141,5 @@ const playerClicked = c => {
     game.tooglePlayer();
     document.body.removeChild(spinner.el);
   }, 0);
-};
+}
+
